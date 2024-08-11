@@ -7,12 +7,24 @@ const defaultMessages: Message[] = [
   {
     id: "1",
     role: "user",
-    content: "Hello, world!",
+    content: "1+4=?",
   },
   {
     id: "2",
     role: "assistant",
-    content: "Hi there! Steven here.",
+    content: "1 + 4 equals 5.",
+  },
+  {
+    id: "3",
+    role: "user",
+    content: "能看到图片吗",
+    experimental_attachments: [
+      {
+        name: "IMG_6957.jpg",
+        contentType: "image/jpeg",
+        url: "data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnK...",
+      },
+    ],
   },
 ];
 
@@ -42,16 +54,17 @@ export default function Home() {
       setCoreMessages(res);
       setLoading(false);
     } catch (error) {
-      console.error("Error converting messages:", error);
+      console.error(error);
+      setError(getErrorMessage(error));
       setCoreMessages([]);
-      if (error instanceof Error) {
-        setError(error.message);
-      } else {
-        setError("An unknown error occurred. see console for more details.");
-      }
     } finally {
       setLoading(false);
     }
+  };
+
+  const getErrorMessage = (error: unknown): string => {
+    if (error instanceof Error) return error.message;
+    return "An unknown error occurred. See console for more details.";
   };
 
   return (
@@ -59,7 +72,6 @@ export default function Home() {
       <div className="z-10 w-full max-w-5xl items-center font-mono text-sm">
         <p>test convertToCoreMessages.</p>
         <textarea
-          defaultValue={text}
           className="border border-gray-500 rounded-md p-2 my-4 w-full max-w-5xl height-96 dark:bg-gray-800"
           rows={10}
           cols={30}
