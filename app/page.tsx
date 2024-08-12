@@ -22,7 +22,7 @@ const defaultMessages: Message[] = [
       {
         name: "IMG_6957.jpg",
         contentType: "image/jpeg",
-        url: "data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnK...",
+        url: "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAgEBAUKFVv8AAAAASUVORK5CYII=",
       },
     ],
   },
