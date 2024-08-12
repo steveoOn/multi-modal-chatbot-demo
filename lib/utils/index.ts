@@ -1,5 +1,5 @@
 import { CoreCompatibleMessage, CoreMessageRole } from "@/types";
-import { Message, convertToCoreMessages, type ToolInvocation } from "ai";
+import { Message, type ToolInvocation } from "ai";
 import { copyConvertToCoreMessages } from "./copy-convert-messages";
 
 type GenericToolResult = Extract<ToolInvocation, { state: "result" }>;
