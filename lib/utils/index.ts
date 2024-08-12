@@ -1,5 +1,6 @@
 import { CoreCompatibleMessage, CoreMessageRole } from "@/types";
 import { Message, convertToCoreMessages, type ToolInvocation } from "ai";
+import { copyConvertToCoreMessages } from "./copy-convert-messages";
 
 type GenericToolResult = Extract<ToolInvocation, { state: "result" }>;
 /**
@@ -144,7 +145,7 @@ export function convertMessagesToCoreMessages(messages: Message[]) {
       }
     });
 
-    return convertToCoreMessages(compatibleMessages);
+    return copyConvertToCoreMessages(compatibleMessages);
   } catch (error) {
     console.error("Error details:", error);
     throw new Error(
