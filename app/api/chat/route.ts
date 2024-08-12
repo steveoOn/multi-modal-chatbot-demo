@@ -1,4 +1,5 @@
 import { convertMessagesToCoreMessages } from "@/lib/utils";
+import { customStringify } from "@/lib/utils/usual-tools";
 
 export const runtime = "edge";
 // Allow streaming responses up to 30 seconds
@@ -46,7 +47,7 @@ export async function POST(req: Request) {
       }
     });
 
-    return new Response(JSON.stringify(coreMessages), {
+    return new Response(customStringify(coreMessages), {
       headers: {
         "Content-Type": "application/json",
       },

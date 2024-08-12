@@ -28,6 +28,19 @@ const defaultMessages: Message[] = [
   },
 ];
 
+function customParse(jsonString: string): any {
+  return JSON.parse(jsonString, (key, value) => {
+    if (value && typeof value === "object" && value.type === "Uint8Array") {
+      return new Uint8Array(
+        atob(value.data)
+          .split("")
+          .map((char) => char.charCodeAt(0))
+      );
+    }
+    return value;
+  });
+}
+
 async function getCoreMessages(messages: Message[]) {
   const res = await fetch("/api/chat", {
     method: "POST",
@@ -36,7 +49,9 @@ async function getCoreMessages(messages: Message[]) {
     },
     body: JSON.stringify({ messages }),
   });
-  return res.json();
+
+  const data = customParse(JSON.stringify(await res.json()));
+  return data;
 }
 
 export default function Home() {
